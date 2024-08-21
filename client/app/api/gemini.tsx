@@ -1,8 +1,9 @@
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 
 const model = new ChatGoogleGenerativeAI({
-  model: "gemini-pro",
-  maxOutputTokens: 2048,
+    model: "gemini-1.5-flash",
+    maxOutputTokens: 2048,
+    apiKey: process.env.GEMINI_API_KEY,
 });
 
 // Batch and stream are also supported
