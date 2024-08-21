@@ -1,11 +1,14 @@
+/* globals.css */
+
+/* Import Tailwind's base, components, and utilities */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
+/* Define custom CSS variables */
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 0 0% 0%; /* Black background */
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
@@ -60,24 +63,54 @@
   }
 }
 
+/* Apply global styles */
 @layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
+    @apply flex flex-col min-h-screen;
+    margin: 0;
+    padding: 0;
   }
 }
 
-main, nav {
-  @apply max-w-6xl mx-auto my-12;
+/* Style main container */
+main {
+  @apply flex flex-col items-center justify-center max-w-6xl mx-auto;
 }
-p {
-  @apply mt-2;
+
+/* Position the nav at the top left */
+nav {
+  @apply fixed top-0 left-0 p-4;
+  width: auto; /* Adjust width as needed */
+  background-color: black; /* Ensure nav background is black */
 }
+
+/* Ensure navigation menu items are aligned vertically */
+nav ul {
+  @apply flex flex-col space-y-2;
+}
+
+/* Styling for the header */
 h1 {
-  @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
+  @apply text-5xl font-extrabold tracking-tight lg:text-6xl mb-6;
+  color: white; /* Set text color to white */
+  text-align: center;
 }
-h2 {
-  @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0;
+
+/* Styling for the button */
+button {
+  @apply px-6 py-3 text-xl font-semibold bg-primary text-primary-foreground rounded-md shadow-md transition-colors hover:bg-primary-foreground hover:text-primary;
 }
+
+/* Optional: Add spacing between header and button */
+.container {
+  @apply flex flex-col items-center justify-center space-y-6;
+}
+
+
+
+
+
