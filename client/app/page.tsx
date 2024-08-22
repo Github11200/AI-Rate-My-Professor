@@ -27,7 +27,7 @@ export default function Home() {
             />
           </Link>
           <h1 className="text-lg font-extrabold tracking-tight">
-            ProfessorPulse
+            DreamProf
           </h1>
         </div>
      
@@ -106,7 +106,7 @@ export default function Home() {
     {/* Footer */}
     <footer className="bg-gray-800 text-white py-6 mt-12">
       <div className="max-w-7xl mx-auto text-center">
-        <p className="text-lg">© {new Date().getFullYear()} ProfessorPulse. All rights reserved.</p>
+        <p className="text-lg">© {new Date().getFullYear()} DreamProf. All rights reserved.</p>
         <div className="mt-4">
           <Link href="/privacy" className="text-gray-400 hover:text-gray-300">
             Privacy Policy
