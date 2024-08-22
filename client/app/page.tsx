@@ -3,16 +3,122 @@
 import { Button } from "@/components/ui/button";
 import { LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs";
 import Link from "next/link";
+import ParticlesBackground from "@/components/particles-back";
+import Image from "next/image";
+import { useState } from "react";
+import { ModeToggle } from "@/components/mode-toggle";
+import { Card } from "@/components/ui/card";
 
 export default function Home() {
+ 
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <div>
-      <h1>Design landing page here</h1>
-      <Link href="/dashboard">
-        <Button> Dashboard</Button>
-      </Link>
-      <LoginLink postLoginRedirectURL="/dashboard">Sign In</LoginLink>
-      <RegisterLink postLoginRedirectURL="/dashboard">Sign Up</RegisterLink>
-    </div>
-  );
+    <div className="relative min-h-screen">
+      <nav className="fixed top-0 left-0 right-0 flex items-center justify-between p-2 bg-white dark:bg-gray-900 shadow-md z-10">
+        <div className="flex items-center space-x-2">
+          <Link href="/" aria-label="Homepage">
+            <Image
+              src="/logo.svg"
+              alt="Your Logo"
+              width={30}
+              height={30}
+              priority
+            />
+          </Link>
+          <h1 className="text-lg font-extrabold tracking-tight">
+            ProfessorPulse
+          </h1>
+        </div>
+     
+        <div className="md:hidden flex items-center space-x-4">
+          <button
+            className="text-gray-900 dark:text-gray-100 focus:outline-none"
+            aria-label="Toggle Menu"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16m-7 6h7"
+              />
+            </svg>
+          </button>
+          <ModeToggle />
+        </div>
+
+        {menuOpen && (
+          <div className="absolute top-full left-0 w-full bg-white dark:bg-gray-900 shadow-lg z-20 md:hidden">
+       
+            <div className="px-4 py-2">
+              <LoginLink postLoginRedirectURL="/dashboard">
+                <Button>Sign In</Button>
+              </LoginLink>
+              <RegisterLink postLoginRedirectURL="/dashboard">
+              <Button>Sign Up</Button>
+              </RegisterLink>
+            </div>
+          </div>
+        )}
+        <div className="hidden md:flex items-center space-x-4">
+          <ModeToggle />
+          
+          <LoginLink postLoginRedirectURL="/dashboard">
+            <Button>Sign In</Button>
+          </LoginLink>
+          <RegisterLink postLoginRedirectURL="/dashboard">
+            <Button>Sign Up</Button>
+          </RegisterLink>
+        </div>
+      </nav>
+
+      <div
+        id="home"
+        className="flex flex-col items-center justify-center min-h-screen pt-20 md:pt-24 p-4 text-center"
+      >
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-4">
+            Spend more time on what matters,
+            <br />
+            let our chatbot handle the rest.
+          </h1>
+      
+          <p className="text-lg mb-8 max-w-2xl">
+          Get accurate and insightful information about your professors with our chatbot. Simply ask questions to receive detailed feedback, ratings, and advice from fellow students, helping you make informed decisions about your courses and instructors.
+          </p>
+          <Link href="/dashboard" aria-label="Go to Dashboard">
+            <Button>Go to Dashboard</Button>
+          </Link>
+        </div>
+    
+      </div>
+
+
+
+    {/* Footer */}
+    <footer className="bg-gray-800 text-white py-6 mt-12">
+      <div className="max-w-7xl mx-auto text-center">
+        <p className="text-lg">© {new Date().getFullYear()} ProfessorPulse. All rights reserved.</p>
+        <div className="mt-4">
+          <Link href="/privacy" className="text-gray-400 hover:text-gray-300">
+            Privacy Policy
+          </Link>
+          <span className="mx-2">|</span>
+          <Link href="/terms" className="text-gray-400 hover:text-gray-300">
+            Terms of Service
+          </Link>
+        </div>
+      </div>
+    </footer>
+  </div>
+);
 }
+
