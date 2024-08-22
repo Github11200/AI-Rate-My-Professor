@@ -9,30 +9,20 @@ if (!supabaseKey) throw new Error(`Expected SUPABASE_SERVICE_ROLE_KEY`);
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
 if (!url) throw new Error(`Expected env var SUPABASE_URL`);
 
-interface ProfessorObject {
-  name: string;
-  subject: string;
-  rating: number;
-  description: string;
-}
-
 export async function POST(req: NextRequest, res: NextResponse) {
-  const data = await req.json();
-  const userId = data.userId;
-  const professor = data.professor as ProfessorObject;
+  const { prompt, userId, topK } = await req.json();
 
   const client = createClient(url, supabaseKey);
+  const embeddings = new MistralAIEmbeddings();
 
-  await SupabaseVectorStore.fromTexts(
-    [professor.description],
-    [{ userId: userId, name: professor.name, rating: professor.rating }],
-    new MistralAIEmbeddings(),
-    {
-      client,
-      tableName: "professors",
-      queryName: "match_documents",
-    }
-  );
+  const vectorStore = new SupabaseVectorStore(embeddings, {
+    client,
+    tableName: "professors",
+  });
 
-  return new Response("Added document");
+  const result = await vectorStore.similaritySearch(prompt, topK, {
+    userId: userId,
+  });
+
+  return new Response(JSON.stringify(result));
 }
