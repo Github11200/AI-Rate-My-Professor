@@ -76,21 +76,14 @@
   }
 }
 
-/* Style main container */
+/* Main container styling */
 main {
   @apply flex flex-col items-center justify-center max-w-6xl mx-auto;
 }
 
 /* Position the nav at the top left */
 nav {
-  @apply fixed top-0 left-0 p-4;
-  width: auto; /* Adjust width as needed */
-  background-color: black; /* Ensure nav background is black */
-}
-
-/* Ensure navigation menu items are aligned vertically */
-nav ul {
-  @apply flex flex-col space-y-2;
+  @apply fixed top-0 left-0 p-4 bg-black text-white flex space-x-4;
 }
 
 /* Styling for the header */
@@ -109,6 +102,7 @@ button {
 .container {
   @apply flex flex-col items-center justify-center space-y-6;
 }
+
 
 
 
