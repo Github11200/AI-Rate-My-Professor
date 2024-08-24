@@ -15,7 +15,7 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen">
-      <nav className="fixed top-0 left-0 right-0 flex items-center justify-between p-2 bg-white dark:bg-gray-900 shadow-md z-10">
+      <nav className="fixed top-0 left-0 right-0 flex items-center justify-between p-2 bg-white dark:bg-[#393b3e] shadow-md z-10">
         <div className="flex items-center space-x-2">
           <Link href="/" aria-label="Homepage">
             <Image
@@ -104,7 +104,7 @@ export default function Home() {
 
 
     {/* Footer */}
-    <footer className="bg-gray-800 text-white py-6 mt-12">
+    <footer className="bg-[#393b3e] text-white py-1 mt-8">
       <div className="max-w-7xl mx-auto text-center">
         <p className="text-lg">© {new Date().getFullYear()} DreamProf. All rights reserved.</p>
         <div className="mt-4">
