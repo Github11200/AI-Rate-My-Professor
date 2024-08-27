@@ -13,7 +13,7 @@ importers:
         version: 2.3.6(@babel/core@7.25.2)(next@14.2.5(@babel/core@7.25.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@langchain/community':
         specifier: ^0.2.28
-        version: 0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0)
+        version: 0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0)
       '@langchain/mistralai':
         specifier: ^0.0.28
         version: 0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))
@@ -23,9 +23,12 @@ importers:
       '@radix-ui/react-slot':
         specifier: ^1.1.0
         version: 1.1.0(@types/react@18.3.3)(react@18.3.1)
+      '@supabase/auth-helpers-nextjs':
+        specifier: ^0.10.0
+        version: 0.10.0(@supabase/supabase-js@2.45.2)
       '@supabase/supabase-js':
-        specifier: ^2.45.1
-        version: 2.45.1
+        specifier: ^2.45.2
+        version: 2.45.2
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -1494,6 +1497,16 @@ packages:
   '@rushstack/eslint-patch@1.10.4':
     resolution: {integrity: sha512-WJgX9nzTqknM393q1QJDJmoW28kUfEnybeTfVNcNAPnIx210RXm2DiXiHzfNPJNIUUb1tJnz/l4QGtJ30PgWmA==}
 
+  '@supabase/auth-helpers-nextjs@0.10.0':
+    resolution: {integrity: sha512-2dfOGsM4yZt0oS4TPiE7bD4vf7EVz7NRz/IJrV6vLg0GP7sMUx8wndv2euLGq4BjN9lUCpu6DG/uCC8j+ylwPg==}
+    peerDependencies:
+      '@supabase/supabase-js': ^2.39.8
+
+  '@supabase/auth-helpers-shared@0.7.0':
+    resolution: {integrity: sha512-FBFf2ei2R7QC+B/5wWkthMha8Ca2bWHAndN+syfuEUUfufv4mLcAgBCcgNg5nJR8L0gZfyuaxgubtOc9aW3Cpg==}
+    peerDependencies:
+      '@supabase/supabase-js': ^2.39.8
+
   '@supabase/auth-js@2.64.4':
     resolution: {integrity: sha512-9ITagy4WP4FLl+mke1rchapOH0RQpf++DI+WSG2sO1OFOZ0rW3cwAM0nCrMOxu+Zw4vJ4zObc08uvQrXx590Tg==}
 
@@ -1510,11 +1523,11 @@ packages:
   '@supabase/realtime-js@2.10.2':
     resolution: {integrity: sha512-qyCQaNg90HmJstsvr2aJNxK2zgoKh9ZZA8oqb7UT2LCh3mj9zpa3Iwu167AuyNxsxrUE8eEJ2yH6wLCij4EApA==}
 
-  '@supabase/storage-js@2.6.0':
-    resolution: {integrity: sha512-REAxr7myf+3utMkI2oOmZ6sdplMZZ71/2NEIEMBZHL9Fkmm3/JnaOZVSRqvG4LStYj2v5WhCruCzuMn6oD/Drw==}
+  '@supabase/storage-js@2.7.0':
+    resolution: {integrity: sha512-iZenEdO6Mx9iTR6T7wC7sk6KKsoDPLq8rdu5VRy7+JiT1i8fnqfcOr6mfF2Eaqky9VQzhP8zZKQYjzozB65Rig==}
 
-  '@supabase/supabase-js@2.45.1':
-    resolution: {integrity: sha512-/PVe3lXmalazD8BGMIoI7+ttvT1mLXy13lNcoAPtjP1TDDY83g8csZbVR6l+0/RZtvJxl3LGXfTJT4bjWgC5Nw==}
+  '@supabase/supabase-js@2.45.2':
+    resolution: {integrity: sha512-kJKY3ISFusVKQWCP8Kqo20Ebxy2WLp6Ry/Suco0aQsPXH7bvn7clswsdhcfcH/5Tr0MYz/jcCjF0n/27SetiCw==}
 
   '@swc/counter@0.1.3':
     resolution: {integrity: sha512-e2BR4lsJkkRlKZ/qCHPw9ZaSxc0MVUd7gtbtaB7aMvHeJVYe8sOB8DBZkP2DtISHGSku9sCK6T6cnY0CtXrOCQ==}
@@ -2698,6 +2711,9 @@ packages:
     resolution: {integrity: sha512-2yTgeWTWzMWkHu6Jp9NKgePDaYHbntiwvYuuJLbbN9vl7DC9DvXKOB2BC3ZZ92D3cvV/aflH0osDfwpHepQ53w==}
     hasBin: true
 
+  jose@4.15.9:
+    resolution: {integrity: sha512-1vUQX+IdDMVPj4k8kOxgUqlcK518yluMuGZwqlr44FS1ppZB/5GWh4rZG89erpOBOJjU/OBsnCVFfapsRz6nEA==}
+
   jose@5.7.0:
     resolution: {integrity: sha512-3P9qfTYDVnNn642LCAqIKbTGb9a1TBxZ9ti5zEVEr48aDdflgRjhspWFb6WM4PzAfFbGMJYC4+803v8riCRAKw==}
 
@@ -3485,6 +3501,9 @@ packages:
     resolution: {integrity: sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==}
     engines: {node: '>=10'}
     hasBin: true
+
+  set-cookie-parser@2.7.0:
+    resolution: {integrity: sha512-lXLOiqpkUumhRdFF3k1osNXCy9akgx/dyPZ5p8qAg9seJzXr5ZrlqZuWIMuY6ejOsVLE6flJ5/h3lsn57fQ/PQ==}
 
   set-function-length@1.2.2:
     resolution: {integrity: sha512-pgRc4hJ4/sNjWCSS9AmnS40x3bNMDTknHgL5UaMBTMyJnU90EgWh1Rz+MC9eFu4BuN/UwZjKQuY/1v3rM7HMfg==}
@@ -4791,21 +4810,21 @@ snapshots:
       jose: 5.7.0
       uncrypto: 0.1.3
 
-  '@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0)':
+  '@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0)':
     dependencies:
-      '@langchain/core': 0.2.28(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.1)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8))
-      '@langchain/openai': 0.2.7(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.1)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))
+      '@langchain/core': 0.2.28(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.2)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8))
+      '@langchain/openai': 0.2.7(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.2)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))
       binary-extensions: 2.3.0
       expr-eval: 2.0.2
       flat: 5.0.2
       js-yaml: 4.1.0
-      langchain: 0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.1)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0)
-      langsmith: 0.1.43(@langchain/core@0.2.28(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.1)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8)))(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.1)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8))
+      langchain: 0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.2)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0)
+      langsmith: 0.1.43(@langchain/core@0.2.28(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.2)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8)))(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.2)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8))
       uuid: 10.0.0
       zod: 3.23.8
       zod-to-json-schema: 3.23.2(zod@3.23.8)
     optionalDependencies:
-      '@supabase/supabase-js': 2.45.1
+      '@supabase/supabase-js': 2.45.2
       crypto-js: 4.2.0
       ignore: 5.3.1
       puppeteer: 23.1.1(typescript@5.5.4)
@@ -4828,13 +4847,13 @@ snapshots:
       - peggy
       - pyodide
 
-  '@langchain/core@0.2.28(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.1)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8))':
+  '@langchain/core@0.2.28(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.2)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8))':
     dependencies:
       ansi-styles: 5.2.0
       camelcase: 6.3.0
       decamelize: 1.2.0
       js-tiktoken: 1.0.14
-      langsmith: 0.1.43(@langchain/core@0.2.28(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.1)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8)))(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.1)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8))
+      langsmith: 0.1.43(@langchain/core@0.2.28(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.2)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8)))(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.2)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8))
       mustache: 4.2.0
       p-queue: 6.6.2
       p-retry: 4.6.2
@@ -4847,7 +4866,7 @@ snapshots:
 
   '@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))':
     dependencies:
-      '@langchain/core': 0.2.28(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.1)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8))
+      '@langchain/core': 0.2.28(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.2)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8))
       '@mistralai/mistralai': 0.4.0
       uuid: 10.0.0
       zod: 3.23.8
@@ -4857,9 +4876,9 @@ snapshots:
       - langchain
       - openai
 
-  '@langchain/openai@0.2.7(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.1)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))':
+  '@langchain/openai@0.2.7(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.2)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))':
     dependencies:
-      '@langchain/core': 0.2.28(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.1)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8))
+      '@langchain/core': 0.2.28(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.2)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8))
       js-tiktoken: 1.0.14
       openai: 4.56.0(zod@3.23.8)
       zod: 3.23.8
@@ -4868,9 +4887,9 @@ snapshots:
       - encoding
       - langchain
 
-  '@langchain/textsplitters@0.0.3(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.1)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8))':
+  '@langchain/textsplitters@0.0.3(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.2)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8))':
     dependencies:
-      '@langchain/core': 0.2.28(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.1)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8))
+      '@langchain/core': 0.2.28(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.2)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8))
       js-tiktoken: 1.0.14
     transitivePeerDependencies:
       - langchain
@@ -5177,6 +5196,17 @@ snapshots:
 
   '@rushstack/eslint-patch@1.10.4': {}
 
+  '@supabase/auth-helpers-nextjs@0.10.0(@supabase/supabase-js@2.45.2)':
+    dependencies:
+      '@supabase/auth-helpers-shared': 0.7.0(@supabase/supabase-js@2.45.2)
+      '@supabase/supabase-js': 2.45.2
+      set-cookie-parser: 2.7.0
+
+  '@supabase/auth-helpers-shared@0.7.0(@supabase/supabase-js@2.45.2)':
+    dependencies:
+      '@supabase/supabase-js': 2.45.2
+      jose: 4.15.9
+
   '@supabase/auth-js@2.64.4':
     dependencies:
       '@supabase/node-fetch': 2.6.15
@@ -5203,18 +5233,18 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@supabase/storage-js@2.6.0':
+  '@supabase/storage-js@2.7.0':
     dependencies:
       '@supabase/node-fetch': 2.6.15
 
-  '@supabase/supabase-js@2.45.1':
+  '@supabase/supabase-js@2.45.2':
     dependencies:
       '@supabase/auth-js': 2.64.4
       '@supabase/functions-js': 2.4.1
       '@supabase/node-fetch': 2.6.15
       '@supabase/postgrest-js': 1.15.8
       '@supabase/realtime-js': 2.10.2
-      '@supabase/storage-js': 2.6.0
+      '@supabase/storage-js': 2.7.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -6709,6 +6739,8 @@ snapshots:
 
   jiti@1.21.6: {}
 
+  jose@4.15.9: {}
+
   jose@5.7.0: {}
 
   js-tiktoken@1.0.14:
@@ -6762,16 +6794,16 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.1)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0):
+  langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.2)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0):
     dependencies:
-      '@langchain/core': 0.2.28(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.1)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8))
-      '@langchain/openai': 0.2.7(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.1)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))
-      '@langchain/textsplitters': 0.0.3(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.1)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8))
+      '@langchain/core': 0.2.28(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.2)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8))
+      '@langchain/openai': 0.2.7(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.2)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))
+      '@langchain/textsplitters': 0.0.3(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.2)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8))
       binary-extensions: 2.3.0
       js-tiktoken: 1.0.14
       js-yaml: 4.1.0
       jsonpointer: 5.0.1
-      langsmith: 0.1.43(@langchain/core@0.2.28(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.1)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8)))(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.1)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8))
+      langsmith: 0.1.43(@langchain/core@0.2.28(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.2)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8)))(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.2)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8))
       openapi-types: 12.1.3
       p-retry: 4.6.2
       uuid: 10.0.0
@@ -6779,9 +6811,9 @@ snapshots:
       zod: 3.23.8
       zod-to-json-schema: 3.23.2(zod@3.23.8)
     optionalDependencies:
-      '@langchain/community': 0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0)
+      '@langchain/community': 0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0)
       '@langchain/mistralai': 0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8))
-      '@supabase/supabase-js': 2.45.1
+      '@supabase/supabase-js': 2.45.2
       ignore: 5.3.1
       puppeteer: 23.1.1(typescript@5.5.4)
       ws: 8.18.0
@@ -6789,7 +6821,7 @@ snapshots:
       - encoding
       - openai
 
-  langsmith@0.1.43(@langchain/core@0.2.28(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.1)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8)))(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.1)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8)):
+  langsmith@0.1.43(@langchain/core@0.2.28(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.2)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8)))(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.2)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8)):
     dependencies:
       '@types/uuid': 9.0.8
       commander: 10.0.1
@@ -6798,8 +6830,8 @@ snapshots:
       semver: 7.6.3
       uuid: 9.0.1
     optionalDependencies:
-      '@langchain/core': 0.2.28(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.1)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8))
-      langchain: 0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.1)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.1)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0)
+      '@langchain/core': 0.2.28(langchain@0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.2)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(openai@4.56.0(zod@3.23.8))
+      langchain: 0.2.16(@langchain/community@0.2.28(@langchain/mistralai@0.0.28)(@supabase/supabase-js@2.45.2)(crypto-js@4.2.0)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0))(@langchain/mistralai@0.0.28(langchain@0.2.16)(openai@4.56.0(zod@3.23.8)))(@supabase/supabase-js@2.45.2)(ignore@5.3.1)(openai@4.56.0(zod@3.23.8))(puppeteer@23.1.1(typescript@5.5.4))(ws@8.18.0)
       openai: 4.56.0(zod@3.23.8)
 
   language-subtag-registry@0.3.23: {}
@@ -7339,6 +7371,8 @@ snapshots:
   semver@6.3.1: {}
 
   semver@7.6.3: {}
+
+  set-cookie-parser@2.7.0: {}
 
   set-function-length@1.2.2:
     dependencies:

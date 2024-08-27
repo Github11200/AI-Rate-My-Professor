@@ -3,18 +3,21 @@ import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
 import { createClient } from '@supabase/supabase-js';
 
 // Initialize Supabase client
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
+if (!supabaseUrl) throw new Error(`Expected NEXT_PUBLIC_SUPABASE_URL`);
+
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
+if (!supabaseKey) throw new Error(`Expected NEXT_PUBLIC_SUPABASE_ANON_KEY`);
+
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const model = new ChatGoogleGenerativeAI({
   model: 'gemini-1.5-flash',
   maxOutputTokens: 2048,
-  apiKey: process.env.GEMINI_API_KEY,
+  apiKey: process.env.GOOGLE_API_KEY as string,  // Assuming this is your GEMINI_API_KEY
 });
 
 const systemPrompt = `
-
 You are an intelligent assistant designed to help students find professors based on their specific needs and preferences. Your task is to respond to user queries by identifying the top 3 professors that best match their criteria. Use the Retrieval-Augmented Generation (RAG) approach to ensure the most relevant and up-to-date information is provided.
 
 Guidelines:

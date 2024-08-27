@@ -3,10 +3,10 @@ import { createClient } from "@supabase/supabase-js";
 import { SupabaseVectorStore } from "@langchain/community/vectorstores/supabase";
 import { MistralAIEmbeddings } from "@langchain/mistralai";
 
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY as string;
 if (!supabaseKey) throw new Error(`Expected SUPABASE_SERVICE_ROLE_KEY`);
 
-const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const url = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
 if (!url) throw new Error(`Expected env var SUPABASE_URL`);
 
 interface ProfessorObject {
