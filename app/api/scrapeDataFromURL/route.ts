@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import puppeteer from "puppeteer";
+import chromium from "chrome-aws-lambda";
 
 interface TeacherObject {
   name: string;
@@ -17,7 +18,13 @@ export async function POST(req: NextRequest) {
     return new Response("Invalid URL provided", { status: 400 });
   }
 
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await chromium.puppeteer.launch({
+    args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+    defaultViewport: chromium.defaultViewport,
+    executablePath: await chromium.executablePath,
+    headless: true,
+    ignoreHTTPSErrors: true,
+  });
   const page = await browser.newPage();
   page.setDefaultTimeout(60000);
 
