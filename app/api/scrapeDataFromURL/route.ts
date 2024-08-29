@@ -63,6 +63,7 @@ export async function POST(req: NextRequest) {
         if (!teacherUrl) {
           console.error("Invalid teacher URL");
           continue;
+          A;
         }
 
         await page2.goto(teacherUrl, { waitUntil: "networkidle2" });
