@@ -15,5 +15,5 @@ An intelligent tool designed to help students find the most suitable professors 
 - **Nebila Wako** - [GitHub](https://github.com/nebilawako)
 - **Naitik Oza** - [Github](https://github.com/NaitikOza)
 
-**Important note:** If you encounter any issues or you have any inquirie feel free to reach out to us, we are pleased  to assist and connect.
+**Important note:** The scraping will not work on the deployed website because we weren't able to get Puppeteer deployed, but you can run it locally. The chat should work on the deployed version though.
 
