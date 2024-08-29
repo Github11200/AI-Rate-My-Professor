@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs";
 import Link from "next/link";
 import ParticlesBackground from "@/components/particles-back";
+
 import Image from "next/image";
 import { useState } from "react";
 import { ModeToggle } from "@/components/mode-toggle";
