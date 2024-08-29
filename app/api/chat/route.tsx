@@ -5,9 +5,11 @@ import { createClient } from "@supabase/supabase-js";
 // Initialize Supabase client
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
 if (!supabaseUrl) throw new Error(`Expected NEXT_PUBLIC_SUPABASE_URL`);
+console.log("Supabase URL initialized:", supabaseUrl);
 
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY as string;
 if (!supabaseKey) throw new Error(`Expected SUPABASE_SERVICE_ROLE_KEY`);
+console.log("Supabase Service Role Key initialized.");
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
@@ -16,6 +18,7 @@ const model = new ChatGoogleGenerativeAI({
   maxOutputTokens: 2048,
   apiKey: process.env.GOOGLE_API_KEY as string, // Assuming this is your GEMINI_API_KEY
 });
+console.log("ChatGoogleGenerativeAI model initialized.");
 
 const systemPrompt = `
 You are an intelligent assistant designed to help students find professors based on their specific needs and preferences. Your task is to respond to user queries by identifying the top 3 professors that best match their criteria. Use the Retrieval-Augmented Generation (RAG) approach to ensure the most relevant and up-to-date information is provided.
@@ -49,42 +52,55 @@ Response Structure:
 `;
 
 export async function POST(request: Request) {
-  const { description } = await request.json();
+  try {
+    const { description } = await request.json();
+    console.log("Received description:", description);
 
-  // Fetch professors from the database that match the description
-  const { data: professors, error } = await supabase
-    .from("professors")
-    .select("*")
-    .ilike("description", `%${description}%`);
+    // Fetch professors from the database that match the description
+    const { data: professors, error } = await supabase
+      .from("professors")
+      .select("*")
+      .ilike("description", `%${description}%`);
 
-  if (error) {
-    return NextResponse.json({
-      error: "Error retrieving professors from the database",
-    });
+    if (error) {
+      console.error("Error retrieving professors from the database:", error);
+      return NextResponse.json({
+        error: "Error retrieving professors from the database",
+      });
+    }
+
+    console.log("Number of professors found:", professors.length);
+
+    if (professors.length === 0) {
+      console.log("No matching professors found.");
+      return NextResponse.json({
+        message: "No matching professors found.",
+      });
+    }
+
+    // Construct the prompt for the RAG model with the retrieved professors' data
+    const humanPrompt = `Find professors matching: ${description}. 
+    Here is the list of available professors: 
+    ${professors.map((professor, index) => `
+      Professor ${index + 1}:
+      Name: ${professor.name}
+      Department: ${professor.subject}
+      Rating: ${professor.rating}
+      Description: ${professor.description}`).join("\n")}
+    `;
+
+    console.log("Constructed human prompt:", humanPrompt);
+
+    // Generate the response using the RAG approach with the fetched professors
+    const res = await model.invoke([
+      ["system", systemPrompt],
+      ["human", humanPrompt],
+    ]);
+
+    console.log("Model response:", res.content);
+    return new Response(res.content as BodyInit);
+  } catch (error) {
+    console.error("Error processing request:", error);
+    return new Response("Error processing request", { status: 500 });
   }
-
-  if (professors.length === 0) {
-    return NextResponse.json({
-      message: "No matching professors found.",
-    });
-  }
-
-  // Construct the prompt for the RAG model with the retrieved professors' data
-  const humanPrompt = `Find professors matching: ${description}. 
-  Here is the list of available professors: 
-  ${professors.map((professor, index) => `
-    Professor ${index + 1}:
-    Name: ${professor.name}
-    Department: ${professor.subject}
-    Rating: ${professor.rating}
-    Description: ${professor.description}`).join("\n")}
-  `;
-
-  // Generate the response using the RAG approach with the fetched professors
-  const res = await model.invoke([
-    ["system", systemPrompt],
-    ["human", humanPrompt],
-  ]);
-
-  return new Response(res.content as BodyInit);
 }
