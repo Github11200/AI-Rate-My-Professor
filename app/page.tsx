@@ -75,9 +75,9 @@ export default function Home() {
             decisions about your courses and instructors.
           </p>
           
-          <RegisterLink postLoginRedirectURL="/dashboard">
-              <Button>Go to Dashboard</Button>
-          </RegisterLink>
+          <Link href="/dashboard" aria-label="Go to Dashboard">
+            <Button>Go to Dashboard</Button>
+          </Link>
         </div>
       </div>
 
