@@ -73,9 +73,10 @@ export default function Home() {
             ratings, and advice from fellow students, helping you make informed
             decisions about your courses and instructors.
           </p>
-          <Link href="/dashboard" aria-label="Go to Dashboard">
-            <Button>Go to Dashboard</Button>
-          </Link>
+          
+          <RegisterLink postLoginRedirectURL="/dashboard">
+              <Button>Go to Dashboard</Button>
+          </RegisterLink>
         </div>
       </div>
 
