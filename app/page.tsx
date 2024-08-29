@@ -10,7 +10,6 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { Card } from "@/components/ui/card";
 
 export default function Home() {
- 
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -26,11 +25,9 @@ export default function Home() {
               priority
             />
           </Link>
-          <h1 className="text-lg font-extrabold tracking-tight">
-            DreamProf
-          </h1>
+          <h1 className="text-lg font-extrabold tracking-tight">DreamProf</h1>
         </div>
-     
+
         <div className="md:hidden flex items-center space-x-4">
           <button
             className="text-gray-900 dark:text-gray-100 focus:outline-none"
@@ -54,29 +51,8 @@ export default function Home() {
           </button>
           <ModeToggle />
         </div>
-
-        {menuOpen && (
-          <div className="absolute top-full left-0 w-full bg-white dark:bg-gray-900 shadow-lg z-20 md:hidden">
-       
-            <div className="px-4 py-2">
-              <LoginLink postLoginRedirectURL="/dashboard">
-                <Button>Sign In</Button>
-              </LoginLink>
-              <RegisterLink postLoginRedirectURL="/dashboard">
-              <Button>Sign Up</Button>
-              </RegisterLink>
-            </div>
-          </div>
-        )}
         <div className="hidden md:flex items-center space-x-4">
           <ModeToggle />
-          
-          <LoginLink postLoginRedirectURL="/dashboard">
-            <Button>Sign In</Button>
-          </LoginLink>
-          <RegisterLink postLoginRedirectURL="/dashboard">
-            <Button>Sign Up</Button>
-          </RegisterLink>
         </div>
       </nav>
 
@@ -90,35 +66,36 @@ export default function Home() {
             <br />
             let our chatbot handle the rest.
           </h1>
-      
+
           <p className="text-lg mb-8 max-w-2xl">
-          Get accurate and insightful information about your professors with our chatbot. Simply ask questions to receive detailed feedback, ratings, and advice from fellow students, helping you make informed decisions about your courses and instructors.
+            Get accurate and insightful information about your professors with
+            our chatbot. Simply ask questions to receive detailed feedback,
+            ratings, and advice from fellow students, helping you make informed
+            decisions about your courses and instructors.
           </p>
           <Link href="/dashboard" aria-label="Go to Dashboard">
             <Button>Go to Dashboard</Button>
           </Link>
         </div>
-    
       </div>
 
-
-
-    {/* Footer */}
-    <footer className="bg-[#393b3e] text-white py-1 mt-8">
-      <div className="max-w-7xl mx-auto text-center">
-        <p className="text-lg">© {new Date().getFullYear()} DreamProf. All rights reserved.</p>
-        <div className="mt-4">
-          <Link href="/privacy" className="text-gray-400 hover:text-gray-300">
-            Privacy Policy
-          </Link>
-          <span className="mx-2">|</span>
-          <Link href="/terms" className="text-gray-400 hover:text-gray-300">
-            Terms of Service
-          </Link>
+      {/* Footer */}
+      <footer className="bg-[#393b3e] text-white py-1 mt-8">
+        <div className="max-w-7xl mx-auto text-center">
+          <p className="text-lg">
+            © {new Date().getFullYear()} DreamProf. All rights reserved.
+          </p>
+          <div className="mt-4">
+            <Link href="/privacy" className="text-gray-400 hover:text-gray-300">
+              Privacy Policy
+            </Link>
+            <span className="mx-2">|</span>
+            <Link href="/terms" className="text-gray-400 hover:text-gray-300">
+              Terms of Service
+            </Link>
+          </div>
         </div>
-      </div>
-    </footer>
-  </div>
-);
+      </footer>
+    </div>
+  );
 }
-

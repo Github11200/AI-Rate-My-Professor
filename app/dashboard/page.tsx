@@ -1,13 +1,29 @@
-'use client';
+"use client";
+
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardHeader,
+  CardFooter,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import Markdown from "react-markdown";
+import { text } from "stream/consumers";
 
 export default function Dashboard() {
   const [url, setUrl] = useState("");
   const [professorDescription, setProfessorDescription] = useState("");
   const [results, setResults] = useState(null);
-  const [chatMessages, setChatMessages] = useState([]);
+  const [chatMessages, setChatMessages] = useState([
+    {
+      user: false,
+      text: "Hello! Feel free to ask about what type of professor you're looking for.",
+    },
+  ]);
   const [chatInput, setChatInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -31,9 +47,7 @@ export default function Dashboard() {
       const data = await response.json();
       setResults(data);
 
-      // Send the data to Supabase
-      await Promise.all(data.map((professor) => addProfessorToSupabase(professor)));
-
+      await addProfessorToSupabase(data);
     } catch (error) {
       console.error("Error occurred while fetching data:", error);
     } finally {
@@ -47,21 +61,18 @@ export default function Dashboard() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          professor: {
-            name: professor.name,
-            subject: "Subject Here",
-            rating: professor.rating,
-            description: professor.reviews.join(" "),
-          },
+          professor: professor,
         }),
       });
 
       if (!response.ok) throw new Error("Failed to add professor to Supabase");
 
       console.log("Professor added to Supabase successfully");
-
     } catch (error) {
-      console.error("Error occurred while adding professor to Supabase:", error);
+      console.error(
+        "Error occurred while adding professor to Supabase:",
+        error
+      );
     }
   };
 
@@ -69,23 +80,36 @@ export default function Dashboard() {
     if (!chatInput) return;
 
     try {
+      const ragQueryResult = await fetch("/api/queryVectorDatabase", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt: chatInput, topK: 2 }),
+      });
+
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ description: chatInput }),
+        body: JSON.stringify({
+          userPrompt: chatInput,
+          context: await ragQueryResult.json(),
+        }),
       });
 
-      if (!response.ok) throw new Error("Failed to get a response from the chat API");
+      if (!response.ok)
+        throw new Error("Failed to get a response from the chat API");
 
-      const data = await response.json();
+      const data = await response.text();
+      // @ts-ignore
       setChatMessages((prevMessages) => [
         ...prevMessages,
         { user: true, text: chatInput },
-        { user: false, text: data.content },
+        { user: false, text: data },
       ]);
-
     } catch (error) {
-      console.error("Error occurred while interacting with the chat API:", error);
+      console.error(
+        "Error occurred while interacting with the chat API:",
+        error
+      );
     } finally {
       setChatInput("");
     }
@@ -93,75 +117,76 @@ export default function Dashboard() {
 
   return (
     <div className="p-6 space-y-6 max-w-4xl mx-auto">
-      <div className="space-y-4">
+      <div className="flex gap-2">
         <Input
-          className="border border-gray-300 rounded-lg p-2 w-full"
           type="url"
           placeholder="URL to professors page..."
           value={url}
           onChange={(e) => setUrl(e.target.value)}
         />
-        <Input
-          className="border border-gray-300 rounded-lg p-2 w-full"
-          type="text"
-          placeholder="Type of professor you'd like..."
-          value={professorDescription}
-          onChange={(e) => setProfessorDescription(e.target.value)}
-        />
-        <Button
-          className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
-          onClick={handleSubmit}
-          disabled={isLoading}
-        >
+        <Button onClick={handleSubmit} disabled={isLoading}>
           {isLoading ? "Searching..." : "Search"}
         </Button>
       </div>
 
       {results && (
-        <div className="space-y-4">
-          <h2 className="text-xl font-bold">Results:</h2>
-          {results.map((professor, index) => (
-            <div key={index} className="p-4 border border-gray-200 rounded-lg shadow-md">
-              <h3 className="text-lg font-semibold">{professor.name}</h3>
-              <p className="text-gray-600">Rating: {professor.rating}</p>
-              <p className="text-gray-600">Difficulty: {professor.difficulty}</p>
-              <p className="text-gray-600 font-medium">Reviews:</p>
-              <ul className="list-disc pl-5 space-y-2">
-                {professor.reviews.map((review, i) => (
-                  <li key={i} className="text-gray-700">{review}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-xl font-bold">Results:</CardTitle>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-2">
+            {results.map((professor, index) => (
+              <Card key={index}>
+                <CardHeader>
+                  <CardTitle>{professor.name}</CardTitle>
+                  <CardDescription>Rating: {professor.rating}</CardDescription>
+                  <CardDescription>
+                    Difficulty: {professor.difficulty}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p>Reviews:</p>
+                  <ul className="list-disc pl-5 space-y-2">
+                    {professor.reviews.map((review, i) => (
+                      <li key={i}>{review}</li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            ))}
+          </CardContent>
+        </Card>
       )}
 
       {/* Chat Section */}
-      <div className="bg-gray-100 p-6 rounded-lg shadow-md">
-        <h3 className="text-lg font-semibold mb-4">Ask a question about the professor</h3>
-        <div className="space-y-4 mb-4 max-h-60 overflow-y-scroll p-3 bg-white rounded-lg border border-gray-200">
+      <Card>
+        <CardHeader>
+          <CardTitle>Ask a question about the professor</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4 mb-4 overflow-y-scroll">
           {chatMessages.map((msg, index) => (
-            <div key={index} className={msg.user ? "text-blue-600 text-right" : "text-gray-600 text-left"}>
-              <p className={`p-2 rounded-lg ${msg.user ? "bg-blue-100" : "bg-gray-200"}`}>{msg.text}</p>
-            </div>
+            <Card
+              key={index}
+              className={`${msg.user && "bg-primary-foreground"}`}
+            >
+              <Markdown
+                className={`leading-7 [&:not(:first-child)]:mt-6 p-2 pl-4 text-base`}
+              >
+                {msg.text}
+              </Markdown>
+            </Card>
           ))}
-        </div>
-        <div className="flex space-x-2">
+        </CardContent>
+        <CardFooter className="flex space-x-2">
           <Input
-            className="border border-gray-300 rounded-lg p-2 flex-1"
             type="text"
             placeholder="Type your question..."
             value={chatInput}
             onChange={(e) => setChatInput(e.target.value)}
           />
-          <Button
-            className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
-            onClick={handleChatSubmit}
-          >
-            Send
-          </Button>
-        </div>
-      </div>
+          <Button onClick={handleChatSubmit}>Send</Button>
+        </CardFooter>
+      </Card>
     </div>
   );
 }

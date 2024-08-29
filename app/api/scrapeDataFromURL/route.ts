@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
   page.setDefaultTimeout(60000);
 
   try {
-    await page.goto(url, { waitUntil: 'networkidle2' });
+    await page.goto(url, { waitUntil: "networkidle2" });
 
     while (true) {
       try {
@@ -38,9 +38,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const teachers = await page.$$(
-      "a.TeacherCard__StyledTeacherCard-syjs0d-0"
-    );
+    const teachers = await page.$$("a.TeacherCard__StyledTeacherCard-syjs0d-0");
 
     const teacherObjects: TeacherObject[] = [];
 
@@ -58,14 +56,16 @@ export async function POST(req: NextRequest) {
 
       if (rating > 0.0) {
         const page2 = await browser.newPage();
-        const teacherUrl = await teacher.getProperty("href").then((prop) => prop.jsonValue());
+        const teacherUrl = await teacher
+          .getProperty("href")
+          .then((prop) => prop.jsonValue());
 
         if (!teacherUrl) {
           console.error("Invalid teacher URL");
           continue;
         }
 
-        await page2.goto(teacherUrl, { waitUntil: 'networkidle2' });
+        await page2.goto(teacherUrl, { waitUntil: "networkidle2" });
         await page2.bringToFront();
 
         const reviews = await page2.$$eval(
@@ -88,8 +88,10 @@ export async function POST(req: NextRequest) {
 
         await page2.close();
       }
+      console.log("Finished scraping data for teacher: ", name);
     }
 
+    console.log("Scarping complete!");
     await browser.close();
     return NextResponse.json(teacherObjects);
   } catch (error) {

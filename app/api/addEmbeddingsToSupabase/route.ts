@@ -13,7 +13,7 @@ interface ProfessorObject {
   name: string;
   subject: string;
   rating: number;
-  description: string;
+  reviews: string[];
 }
 
 export async function POST(req: NextRequest, res: NextResponse) {
@@ -23,8 +23,14 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const client = createClient(url, supabaseKey);
 
     await SupabaseVectorStore.fromTexts(
-      [professor.description],
-      [{ name: professor.name, subject: professor.subject, rating: professor.rating }],
+      professor.map((p: ProfessorObject) => p.reviews[0]),
+      professor.map((p: ProfessorObject) => {
+        return {
+          name: p.name,
+          subject: p.subject,
+          rating: p.rating,
+        };
+      }),
       new MistralAIEmbeddings(),
       {
         client,
@@ -36,6 +42,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
     return new Response("Professor added to Supabase successfully");
   } catch (error) {
     console.error("Error occurred while adding embeddings to Supabase:", error);
-    return new Response("Error occurred while adding embeddings to Supabase", { status: 500 });
+    return new Response("Error occurred while adding embeddings to Supabase", {
+      status: 500,
+    });
   }
 }
