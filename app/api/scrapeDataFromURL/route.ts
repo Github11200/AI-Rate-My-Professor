@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     return new Response("Invalid URL provided", { status: 400 });
   }
 
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
   page.setDefaultTimeout(60000);
 
