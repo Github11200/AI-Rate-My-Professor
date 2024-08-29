@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server';
-import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
-import { createClient } from '@supabase/supabase-js';
+import { NextResponse } from "next/server";
+import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
+import { createClient } from "@supabase/supabase-js";
 
 // Initialize Supabase client
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
@@ -12,9 +12,9 @@ if (!supabaseKey) throw new Error(`Expected SUPABASE_SERVICE_ROLE_KEY`);
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const model = new ChatGoogleGenerativeAI({
-  model: 'gemini-1.5-flash',
+  model: "gemini-1.5-flash",
   maxOutputTokens: 2048,
-  apiKey: process.env.GOOGLE_API_KEY as string,  // Assuming this is your GEMINI_API_KEY
+  apiKey: process.env.GOOGLE_API_KEY as string, // Assuming this is your GEMINI_API_KEY
 });
 
 const systemPrompt = `
@@ -31,12 +31,6 @@ Guidelines:
 4. Be Concise and Informative: Ensure that the response is clear, concise, and directly addresses the user’s query. If there are any additional factors that the user should consider, mention them briefly.
 
 5. Provide Further Assistance: If the user has follow-up questions or needs more specific information, be ready to assist with further tailored suggestions.
-
-Example Queries:
-
-- “I’m looking for a computer science professor who’s good at explaining complex topics.”
-- “Which professors are known for giving fair exams in the economics department?”
-- “Can you suggest a professor with a strong background in AI research?”
 
 Response Structure:
 
@@ -59,18 +53,37 @@ export async function POST(request: Request) {
 
   // Fetch professors from the database that match the description
   const { data: professors, error } = await supabase
-    .from('professors')
-    .select('*')
-    .ilike('description', `%${description}%`);
+    .from("professors")
+    .select("*")
+    .ilike("description", `%${description}%`);
 
   if (error) {
-    return NextResponse.json({ error: 'Error retrieving professors from database' });
+    return NextResponse.json({
+      error: "Error retrieving professors from the database",
+    });
   }
+
+  if (professors.length === 0) {
+    return NextResponse.json({
+      message: "No matching professors found.",
+    });
+  }
+
+  // Construct the prompt for the RAG model with the retrieved professors' data
+  const humanPrompt = `Find professors matching: ${description}. 
+  Here is the list of available professors: 
+  ${professors.map((professor, index) => `
+    Professor ${index + 1}:
+    Name: ${professor.name}
+    Department: ${professor.subject}
+    Rating: ${professor.rating}
+    Description: ${professor.description}`).join("\n")}
+  `;
 
   // Generate the response using the RAG approach with the fetched professors
   const res = await model.invoke([
-    ['system', systemPrompt],
-    ['human', `Find professors matching: ${description}`],
+    ["system", systemPrompt],
+    ["human", humanPrompt],
   ]);
 
   return new Response(res.content as BodyInit);

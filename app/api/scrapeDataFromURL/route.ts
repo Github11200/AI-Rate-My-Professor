@@ -20,30 +20,22 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     while (true) {
       try {
-        // Wait for the button to be visible
         await page.waitForSelector("button.Buttons__Button-sc-19xdot-1", {
           timeout: 5000,
         });
 
-        let button = await page.$eval(
-          `button.Buttons__Button-sc-19xdot-1`,
-          (element) => element.click()
+        await page.$eval("button.Buttons__Button-sc-19xdot-1", (element) =>
+          element.click()
         );
       } catch (error) {
-        // If the button is not found, break the loop
-        console.log("Show More button not found. All content loaded.");
+        console.log("data is scrapping");
         break;
       }
     }
 
-    let teachers = await page
-      .$$("a.TeacherCard__StyledTeacherCard-syjs0d-0")
-      .then((result) => {
-        return result;
-      })
-      .catch((error) => {
-        throw new Error(error);
-      });
+    const teachers = await page.$$(
+      "a.TeacherCard__StyledTeacherCard-syjs0d-0"
+    );
 
     const teacherObjects: TeacherObject[] = [];
 
@@ -97,12 +89,13 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     await browser.close();
 
-    return new Response(JSON.stringify(teacherObjects));
+    return NextResponse.json(teacherObjects);
+  } catch (error) {
+    console.error("Error occurred while scraping data:", error);
+    return new Response("Error occurred while scraping data", { status: 500 });
   } finally {
-    console.log("exiting");
-
     if (browser) {
-      browser.close();
+      await browser.close();
     }
   }
 }
