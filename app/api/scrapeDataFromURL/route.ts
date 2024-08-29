@@ -8,27 +8,32 @@ interface TeacherObject {
   reviews: string[];
 }
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
   const { url } = await req.json();
+
+  // Validate the URL before proceeding
+  if (!url || !/^https?:\/\/.+\..+$/.test(url)) {
+    console.error("Invalid URL provided:", url);
+    return new Response("Invalid URL provided", { status: 400 });
+  }
 
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   page.setDefaultTimeout(60000);
 
   try {
-    await page.goto(url);
+    await page.goto(url, { waitUntil: 'networkidle2' });
 
     while (true) {
       try {
         await page.waitForSelector("button.Buttons__Button-sc-19xdot-1", {
           timeout: 5000,
         });
-
         await page.$eval("button.Buttons__Button-sc-19xdot-1", (element) =>
           element.click()
         );
       } catch (error) {
-        console.log("data is scrapping");
+        console.log("No more buttons to click, starting data scraping.");
         break;
       }
     }
@@ -39,56 +44,53 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     const teacherObjects: TeacherObject[] = [];
 
-    for (let teacher of teachers) {
-      const name = (await teacher.$eval(
+    for (const teacher of teachers) {
+      const name = await teacher.$eval(
         ".CardName__StyledCardName-sc-1gyrgim-0.cJdVEK",
         (el) => el.textContent
-      )) as string;
-
-      const rating = parseFloat(
-        (await teacher.$eval(
-          ".CardNumRating__CardNumRatingNumber-sc-17t4b9u-2",
-          (el) => el.textContent
-        )) as string
       );
 
-      if (rating > 0.0) {
-        const teacherObject: TeacherObject = {
-          name: "",
-          rating: 0.0,
-          difficulty: 0.0,
-          reviews: [],
-        };
+      const ratingText = await teacher.$eval(
+        ".CardNumRating__CardNumRatingNumber-sc-17t4b9u-2",
+        (el) => el.textContent
+      );
+      const rating = parseFloat(ratingText || "0");
 
+      if (rating > 0.0) {
         const page2 = await browser.newPage();
-        await page2.goto(await (await teacher.getProperty("href")).jsonValue());
+        const teacherUrl = await teacher.getProperty("href").then((prop) => prop.jsonValue());
+
+        if (!teacherUrl) {
+          console.error("Invalid teacher URL");
+          continue;
+        }
+
+        await page2.goto(teacherUrl, { waitUntil: 'networkidle2' });
         await page2.bringToFront();
 
         const reviews = await page2.$$eval(
           ".Comments__StyledComments-dzzyvm-0.gRjWel",
-          (el) => el.map((x) => x.textContent)
+          (els) => els.map((el) => el.textContent || "")
         );
 
-        const difficulty = parseFloat(
-          (await page2.$eval(
-            ".FeedbackItem__FeedbackNumber-uof32n-1.kkESWs",
-            (el) => el.textContent
-          )) as string
+        const difficultyText = await page2.$eval(
+          ".FeedbackItem__FeedbackNumber-uof32n-1.kkESWs",
+          (el) => el.textContent
         );
+        const difficulty = parseFloat(difficultyText || "0");
 
-        teacherObject.reviews = reviews as string[];
-        teacherObject.name = name;
-        teacherObject.rating = rating;
-        teacherObject.difficulty = difficulty;
+        teacherObjects.push({
+          name: name || "",
+          rating: rating || 0.0,
+          difficulty: difficulty || 0.0,
+          reviews: reviews as string[],
+        });
 
         await page2.close();
-
-        teacherObjects.push(teacherObject);
       }
     }
 
     await browser.close();
-
     return NextResponse.json(teacherObjects);
   } catch (error) {
     console.error("Error occurred while scraping data:", error);
